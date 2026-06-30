@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <meta name="description" content="Aplicación web para consultar el clima en tiempo real utilizando la API de OpenWeather.">
+    <title>Aplicación del clima / Mateo Angel</title>
+</head>
+<body>
+
+<div class="contenedor">
+<!-- ======================
+     CABECERA
+====================== -->
+    <header>
+
+        <h1>Aplicación del clima</h1>
+
+    </header>
+
+<!-- ====================
+     BÚSQUEDA
+====================== -->
+
+    <main>
+        <section class="busqueda">
+            <input type="search" id="inputCiudad" placeholder="Escribe una ciudad..." autocomplete="off">
+            <button id="btnBuscar" type="button">Buscar</button>
+        </section>
+
+<!-- ======================
+     CLIMA PRINCIPAL
+====================== -->
+        <section class="clima-principal">
+
+            <img id="iconoClima" src="" alt="Icono del clima">
+            
+            <h2 id="temperatura"></h2>
+            
+            <p id="ciudad"></p>
+            
+            <p id="descripcion"></p>
+
+        </section>
+
+<!-- ======================
+     DETALLES     
+====================== -->
+        <section class="detalles">
+            <article class="card-detalle">
+                <h3>Sensación</h3>
+                <p id="sensacion"></p>
+            </article>
+            
+            <article class="card-detalle">
+                <h3>Humedad</h3>
+                <p id="humedad"></p>
+            </article>
+            
+            <article class="card-detalle">
+                <h3>Viento</h3>
+                <p id="viento"></p>
+            </article>
+            
+            <article class="card-detalle">
+                <h3>Presión</h3>
+                <p id="presion"></p>
+            </article>
+            
+            <article class="card-detalle">
+                <h3>Visibilidad</h3>
+                <p id="visibilidad"></p>
+            </article>
+        </section>
+
+<!-- ======================
+     PRONÓSTICO
+====================== -->
+        <section class="pronostico">
+<!-- Las tarjetas del pronóstico se crearán dinámicamente con JavaScript -->
+        </section>
+    </main>
+
+
+    <footer>
+        <small>
+            Desarrollado por Mateo Angel
+        </small>
+    </footer>
+
+</div>
+
+
+
+
+<script src="src/dom.js"></script>
+<script src="src/storage.js"></script>
+<script src="src/api.js"></script>
+<script src="src/weatherService.js"></script>
+<script src="src/eventListeners.js"></script>
+<script src="src/ui.js"></script>
+<script src="src/app.js"></script>
+
+
+</body>
+</html>
