@@ -106,7 +106,7 @@ header p{
     border-radius: 0.5rem;
 }
 #iconoClima {
-    width: 3rem;
+    width: 100px;
     height: auto;
 }
 #temperatura {
@@ -122,6 +122,24 @@ header p{
     font-weight: 400;
 }
 /* DETALLES */
+
+.detalles{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.card-detalle {
+    background-color: var(--color-fondo);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* PRONOSTICO */
 
