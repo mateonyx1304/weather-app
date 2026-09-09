@@ -138,11 +138,26 @@ header p{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
 }
 
+.card-detalle h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card-detalle p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-texto);
+}
 
 /* PRONOSTICO */
-
+.pronostico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
 /* FOOTER */
 
 /* RESPONSIVE */
