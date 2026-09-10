@@ -128,6 +128,7 @@ header p{
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
     width: 100%;
+    padding: 1.2rem;
 }
 
 .card-detalle {
@@ -158,6 +159,58 @@ header p{
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.2rem;
 }
-/* FOOTER */
 
+.card-pronostico {
+    background-color: var(--color-fondo);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.card-pronostico .max {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.card-pronostico .min {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-texto);
+}
+
+.card-pronostico .dia {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card-pronostico img {
+    width: 80px;
+    height: auto;
+}
+
+.card-pronostico .temps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+/* FOOTER */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: var(--color-primario-hover)
+}
 /* RESPONSIVE */
+
+@media (max-width: 600px) {
+    .busqueda {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
