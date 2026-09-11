@@ -1,9 +1,10 @@
-import {obtenerClimaActual} from './api.js';
-import {procesarClimaActual} from './weatherService.js';
-import {mostrarClimaActual} from './ui.js';
+import {inicializarEventos} from './eventListeners.js';
+
+// Se inicializan los eventos al cargar la página
+inicializarEventos();
 
 
-obtenerClimaActual("la estrella").then(datosCrudos => {
-    const datosLimpios = procesarClimaActual(datosCrudos); 
-    mostrarClimaActual(datosLimpios);
-});
+// obtenerClimaActual("la estrella").then(datosCrudos => {
+//    const datosLimpios = procesarClimaActual(datosCrudos); 
+//    mostrarClimaActual(datosLimpios);
+// });
