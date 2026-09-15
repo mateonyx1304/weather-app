@@ -1,9 +1,9 @@
 // SE IMPORTAN LOS ELEMENTOS QUE SE NECESITAN DEL DOM
 
 import {inputCiudad, btnBuscar} from './dom.js';
-import {obtenerClimaActual} from './api.js';
-import {procesarClimaActual} from './weatherService.js';
-import {mostrarClimaActual} from './ui.js';
+import {obtenerClimaActual, obtenerPronostico} from './api.js';
+import {procesarClimaActual, procesarPronostico} from './weatherService.js';
+import {mostrarClimaActual, mostrarPronostico} from './ui.js';
 
 // SE CREA LA FUNCIÓN ENCARGADA DE EJECUTAR LA BÚSQUEDA
 
@@ -18,14 +18,20 @@ async function realizarBusqueda() {
     }
 
     try {
-// Se ejecuta el flujo completo: obtener datos crudos, procesarlos y mostrarlos en la UI
-        const datosCrudos = await obtenerClimaActual(ciudad);
-        const datosLimpios = procesarClimaActual(datosCrudos);
-        mostrarClimaActual(datosLimpios);
-// Se limpia el input para que quede vacío después de la búsqueda
+// SE OBTIENEN LOS DATOS DE LA API: CLIMA ACTUAL Y PRONOSTICO
+        const datosClimaCrudos = await obtenerClimaActual(ciudad);
+        const datosPronosticoCrudos = await obtenerPronostico(ciudad);
+// SE PROCESAN Y LIMPIAN LOS DATOS PARA OBTENER SOLO LO NECESARIO
+        const climaLimpio = procesarClimaActual(datosClimaCrudos);
+        const pronosticoLimpio = procesarPronostico(datosPronosticoCrudos);
+// SE RENDERIZAN AMBAS SECCIONES DE LA INTERFAZ
+        mostrarClimaActual(climaLimpio);
+        mostrarPronostico(pronosticoLimpio);
+// LIMPIAMOS EL INPUT
         inputCiudad.value = '';
     } catch (error) {
-        alert('No se pudo obtener el clima para la ciudad ingresada. Por favor, verifica el nombre e intenta nuevamente.');
+        console.error('Error al obtener los datos del clima:', error);
+        alert('No se pudo obtener la información del clima. Por favor, verifica el nombre de la ciudad e intenta nuevamente.');
     }
 }
 
