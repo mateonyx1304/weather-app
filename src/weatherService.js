@@ -17,20 +17,45 @@ export function procesarClimaActual(datos) {
 // LLAMAMOS LA FUNCION PROCESAR PRONOSTICO PARA LIMPIAR LOS DATOS DEL PRONOSTICO
 
 export function procesarPronostico(datos) {
-//  SE FILTRA PARA TOMAR SOLO LA INFORMACIÓN QUE NECESITAMOS (CERCA DEL MEDIO DIA)
-    const pronosticoDiario = datos.list.filter(item => item.dt_txt.includes("12:00:00"));
+// SE AGRUPAN LOS DATOS POR DIA Y SE DEVUELVE UN NUEVO OBJETO CON LOS DATOS LIMPIOS
+    const diasAgrupados = {};
+    datos.list.forEach(item => {
+    // SE EXTRAE SOLO LA FECHA (YYYY-MM-DD) DEL CAMPO dt_txt
+        const fecha = item.dt_txt.split(' ')[0];
 
-    return pronosticoDiario.map(item => {
-    // CONVERTIMOS LA FECHA EJ: 15-09/2026 -> SÁBADO
-        const fecha = new Date(item.dt * 1000); 
-        const diaNombre = fecha.toLocaleDateString('es-ES', { weekday: 'long' });
+        if (!diasAgrupados[fecha]) {
+            diasAgrupados[fecha] = [];
+        }
+        diasAgrupados[fecha].push(item);
+}); 
+
+// SE OBTIENEN LAS FECHAS Y SE DESCARTA EL DÍA DE HOY (PRIMERA FECHA) PARA MOSTRAR SOLO LOS PRONOSTICOS DE LOS SIGUIENTES 5 DÍAS
+    const fechas = Object.keys(diasAgrupados).slice(0,6);
+
+// SE PROCESAN LOS DATOS DE CADA DÍA PARA OBTENER LA TEMPERATURA MÁXIMA Y MÍNIMA DEL DÍA, ASÍ COMO LA DESCRIPCIÓN Y EL ICONO DEL CLIMA
+    return fechas.map(fecha=> {
+        const lecturasDia = diasAgrupados[fecha];
+    //SE OBTIENEN TODAS LAS TEMPERATURAS DEL DIA
+        const temperaturas = lecturasDia.map(l => l.main.temp);
+
+
+    // SE OBTIENE LA TEMPERATURA MÁXIMA Y MÍNIMA DEL DÍA
+        const tempMax = Math.round(Math.max(...temperaturas));
+        const tempMin = Math.round(Math.min(...temperaturas));
+    
+    // SE OBTIENE LA DESCRIPCIÓN Y EL ICONO DEL MEDIO DIA 
+        const lecturaMedioDia = lecturasDia[Math.floor(lecturasDia.length / 2)];
+
+    // SE FORMATEA EL NOMBRE DEL DÍA
+        const fechaObj = new Date(fecha + 'T00:00:00');
+        const diaNombre = fechaObj.toLocaleDateString('es-ES', { weekday: 'long' });
 
         return {
-            dia: diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1),  // Capitalizamos la primera letra
-            tempMax: Math.round(item.main.temp_max),
-            tempMin: Math.round(item.main.temp_min),
-            descripcion: item.weather[0].description,
-            icono: item.weather[0].icon
+            dia: diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1),
+            tempMax, 
+            tempMin,
+            icono: lecturaMedioDia.weather[0].icon,
+            descripcion: lecturaMedioDia.weather[0].description
         };
     });
-}
+};

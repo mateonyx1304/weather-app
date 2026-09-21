@@ -30,7 +30,7 @@ body {
 /* CONTENEDOR */
 .contenedor {
     max-width: 1200px;
-    width: 90%;
+    width: 80%;
     min-height: 90vh;
     color: var(--color-texto-secundario);
     text-align: center;
